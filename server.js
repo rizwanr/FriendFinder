@@ -7,10 +7,10 @@ const path = require('path')
 const app = express()
 const PORT = process.env.PORT || 3000
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+//struggled with setting up the path name
+const publicPathDirectory = path.join(__dirname, './app/public')
 
+app.use(express.static(publicPathDirectory))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -20,11 +20,9 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(function (req, res) {
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
-})
+
+
+require('./app/routing/htmlRoutes.js')(app)
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`)
