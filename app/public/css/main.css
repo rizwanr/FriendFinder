@@ -1,0 +1,29 @@
+.jumbo {
+  background: #ffebee;
+  height: 400px
+}
+
+.title {
+  margin-top: 0px;
+  padding-top: 20px
+}
+
+.survey {
+  margin-top: 50px
+}
+
+p {
+  font-size: 1.2rem
+}
+
+div p {
+  text-align: center
+}
+
+.choices {
+  padding-right: 10px
+}
+
+form button {
+  margin-top: 20px
+}
