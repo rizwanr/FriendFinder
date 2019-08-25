@@ -16,14 +16,11 @@ p {
   font-size: 1.2rem
 }
 
-div p {
-  text-align: center
-}
-
 .choices {
   padding-right: 10px
 }
 
-form button {
-  margin-top: 20px
+.submit-button button {
+  margin-top: 20px;
+  margin-left: 0px
 }
