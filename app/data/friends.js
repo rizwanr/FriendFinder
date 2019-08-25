@@ -1,27 +1,20 @@
-const express = require('express')
-var bodyParser = require('body-parser')
-const app = express()
-const PORT = process.env.PORT || 3000
+let getFriendsApi = [{
+    "name": "Ahmed",
+    "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "scores": [
+      5,
+      1,
+      4,
+      4,
+      5,
+      1,
+      2,
+      5,
+      4,
+      1
+    ]
+  }
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+]
 
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({
-  extended: false
-}))
-
-// parse application/json
-app.use(bodyParser.json())
-
-app.use(function (req, res) {
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
-})
-
-app.listen(PORT, () => {
-  console.log(`listening on ${PORT}`)
-})
+module.exports = getFriendsApi;
