@@ -281,38 +281,44 @@
           method: "GET"
         })
         .then(function (friendsData) {
+          mostCompatibleFriend(friendsData)
 
-          // Here we then log the waitlistData to console, where it will show up as an object.
-          let totaldifference = []
-
-          // Loop through and display each of the customers
-          for (var i = 0; i < friendsData.length; i++) {
-            let friendScores = friendsData[i].scores
-            let currentUserScore = currentUser.scores
-
-
-            let differenceArray = differenceInArray(friendScores, currentUserScore)
-            const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            let difference = differenceArray.reduce(reducer);
-            totaldifference.push({
-              name: friendsData[i].name,
-              photo: friendsData[i].photo,
-              difference
-            })
-            console.log(totaldifference)
-          }
-
-          function differenceInArray(arr1, arr2) {
-            return arr2.map(function (el, i) {
-              return Math.abs(el - arr1[i]);
-            });
-          }
         });
+
+      function mostCompatibleFriend(friendsData) {
+        let totalDifference = []
+
+        for (var i = 0; i < friendsData.length; i++) {
+
+
+          let friendScores = friendsData[i].scores
+          let currentUserScore = currentUser.scores
+
+          let differenceArray = differenceInArray(friendScores, currentUserScore)
+          console.log(differenceArray)
+          const reducer = (accumulator, currentValue) => accumulator + currentValue;
+          let difference = differenceArray.reduce(reducer);
+          totalDifference.push(difference)
+
+        }
+
+        let leastDifference = Math.min(...totalDifference)
+        let index = totalDifference.indexOf(leastDifference)
+        let mostCompatible = friendsData[index]
+        console.log(mostCompatible)
+
+
+      }
+
+      function differenceInArray(friendScores, currentUserScore) {
+        return currentUserScore.map(function (el, i) {
+          return Math.abs(el - friendScores[i]);
+        });
+      }
+
+
+
     }
-
-
-
-
 
     getFriends()
 
