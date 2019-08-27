@@ -294,10 +294,10 @@
           let friendScores = friendsData[i].scores
           let currentUserScore = currentUser.scores
 
-          let differenceArray = differenceInArray(friendScores, currentUserScore)
-          console.log(differenceArray)
+          let scoreArray = differenceInScores(friendScores, currentUserScore)
+          console.log(scoreArray)
           const reducer = (accumulator, currentValue) => accumulator + currentValue;
-          let difference = differenceArray.reduce(reducer);
+          let difference = scoreArray.reduce(reducer);
           totalDifference.push(difference)
 
         }
@@ -310,13 +310,19 @@
 
       }
 
-      function differenceInArray(friendScores, currentUserScore) {
+      /*function differenceInArray(friendScores, currentUserScore) {
         return currentUserScore.map(function (el, i) {
           return Math.abs(el - friendScores[i]);
         });
+      }*/
+
+      function differenceInScores(friendScores, currentUserScore) {
+        let differenceArray = []
+        for (let i = 0; i < friendScores.length; i++) {
+          differenceArray.push(Math.abs(friendScores[i] - currentUserScore[i]))
+        }
+        return differenceArray
       }
-
-
 
     }
 
