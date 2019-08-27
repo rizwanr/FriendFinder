@@ -22,8 +22,9 @@ app.use(bodyParser.json())
 
 
 
-require('./app/routing/htmlRoutes.js')(app)
+//api routes go first as it needs to load befoe the html
 require('./app/routing/apiRoutes.js')(app)
+require('./app/routing/htmlRoutes.js')(app)
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`)
