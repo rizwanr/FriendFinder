@@ -13,12 +13,15 @@ const publicPathDirectory = path.join(__dirname, './app/public')
 app.use(express.static(publicPathDirectory))
 
 // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
-}))
+  extended: true
+}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({
+  type: "application/vnd.api+json"
+}));
 
-// parse application/json
-app.use(bodyParser.json())
 
 
 

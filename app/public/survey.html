@@ -227,26 +227,45 @@
             </div>
           </div>
           <div class="col s12 submit-button">
-            <button class="btn waves-effect waves-light submit" type="submit" name="action">Submit
+            <button class="btn waves-effect waves-light modal-trigger submit" href="#mostCompatibleFriend" type="submit" name="action">Submit
             </button>
           </div>
       </div>
     </div>
     </form>
 
-
-
-  </section>
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('.button-collapse').sideNav();
-
-    });
-  </script>
+    <!-- Modal Structure -->
+    <div class="modal" id="mostCompatibleFriend">
+      <div class="modal-content">
+        <h3>Your new Friend: </h3>
+        <h4 id="friendName"></h4>
+        <img id="friendPhoto" width="300" height="300" />
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-light waves-green btn-flat">OK</a>
+      </div>
+    </div>
 </body>
+
+
+</section>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.button-collapse').sideNav();
+
+  });
+
+  //jquery for the modal class
+  $('.modal').modal();
+</script>
+
+<!-- Modal Trigger
+  <button data-target="modal1" class="btn modal-trigger">Modal</button> -->
+
+
 
 </html>
 
@@ -260,96 +279,30 @@
       name: $(".user-name").val().trim(),
       photo: $(".photo").val().trim(),
       scores: [
-        q1 = $('input[name=group1]:checked').val(),
-        q2 = $('input[name=group2]:checked').val(),
-        q3 = $('input[name=group3]:checked').val(),
-        q4 = $('input[name=group4]:checked').val(),
-        q5 = $('input[name=group5]:checked').val(),
-        q6 = $('input[name=group6]:checked').val(),
-        q7 = $('input[name=group7]:checked').val(),
-        q8 = $('input[name=group8]:checked').val(),
-        q9 = $('input[name=group9]:checked').val(),
-        q10 = $('input[name=group10]:checked').val()
+        $('input[name=group1]:checked').val(),
+        $('input[name=group2]:checked').val(),
+        $('input[name=group3]:checked').val(),
+        $('input[name=group4]:checked').val(),
+        $('input[name=group5]:checked').val(),
+        $('input[name=group6]:checked').val(),
+        $('input[name=group7]:checked').val(),
+        $('input[name=group8]:checked').val(),
+        $('input[name=group9]:checked').val(),
+        $('input[name=group10]:checked').val()
       ]
+
     };
 
-    console.log(currentUser);
-
-    function getFriends() {
-      $.ajax({
-          url: "/api/friends",
-          method: "GET"
-        })
-        .then(function (friendsData) {
-          mostCompatibleFriend(friendsData)
-
-        });
-
-      function mostCompatibleFriend(friendsData) {
-        let totalDifference = []
-
-        for (var i = 0; i < friendsData.length; i++) {
-
-
-          let friendScores = friendsData[i].scores
-          let currentUserScore = currentUser.scores
-
-          let scoreArray = differenceInScores(friendScores, currentUserScore)
-          console.log(scoreArray)
-          const reducer = (accumulator, currentValue) => accumulator + currentValue;
-          let difference = scoreArray.reduce(reducer);
-          totalDifference.push(difference)
-
-        }
-
-        let leastDifference = Math.min(...totalDifference)
-        let index = totalDifference.indexOf(leastDifference)
-        let mostCompatible = friendsData[index]
-        console.log(mostCompatible)
-
-
-      }
-
-      /*function differenceInArray(friendScores, currentUserScore) {
-        return currentUserScore.map(function (el, i) {
-          return Math.abs(el - friendScores[i]);
-        });
-      }*/
-
-      function differenceInScores(friendScores, currentUserScore) {
-        let differenceArray = []
-        for (let i = 0; i < friendScores.length; i++) {
-          differenceArray.push(Math.abs(friendScores[i] - currentUserScore[i]))
-        }
-        return differenceArray
-      }
-
-    }
-
-    getFriends()
 
 
 
-    /*$.post("/api/friends", newReservation,
-      function (data) {
 
-        // If a table is available... tell user they are booked.
-        if (data) {
-          alert("Yay! You are officially booked!");
-        }
 
-        // If a table is available... tell user they on the waiting list.
-        else {
-          alert("Sorry you are on the wait list");
-        }
 
-        // Clear the form when submitting
-        $("#reserve-name").val("");
-        $("#reserve-phone").val("");
-        $("#reserve-email").val("");
-        $("#reserve-unique-id").val("");
-
-      }); */
-
-  });
+    $.post("/api/friends", currentUser, function (data) {
+      console.log(data)
+      $('#friendName').html(data.name)
+      $('#friendPhoto').attr('src', data.photo)
+    });
+  })
 </script>

@@ -1,6 +1,6 @@
 let getFriendsData = [{
     "name": "Ahmed",
-    "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo": "https://images.dog.ceo/breeds/spaniel-japanese/n02085782_2345.jpg",
     "scores": [
       5,
       1,
@@ -17,7 +17,7 @@ let getFriendsData = [{
 
   {
     "name": "Chaity",
-    "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo": "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_2687.jpg",
     "scores": [
       1,
       5,
@@ -35,7 +35,7 @@ let getFriendsData = [{
   {
 
     "name": "Suvro",
-    "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo": "https://images.dog.ceo/breeds/rottweiler/n02106550_10966.jpg",
     "scores": [
       1,
       3,
