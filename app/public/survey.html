@@ -53,18 +53,18 @@
             <div class="row">
               <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="icon_prefix" type="text" class="validate user-name">
+                <input id="icon_prefix" type="text" class="user-name" required>
                 <label for="icon_prefix">First Name</label>
               </div>
               <div class="input-field col s6">
                 <i class="material-icons prefix">insert_photo</i>
-                <input id="icon_prefix" type="text" class="photo">
+                <input id="icon_prefix" type="text" class="photo" required>
                 <label for="icon_photo">Link to your photo </label>
               </div>
             </div>
             <div>
               <p>Your mind is always buzzing with unexplored ideas and plans.</p>
-              <div class='choices'>
+              <div class='choices required'>
                 <input id="q1-choice_1" name="group1" type="radio" value="1" />
                 <label for="q1-choice_1">1 Strongly Disagree</label>
                 <input id="q1-choice_2" name="group1" type="radio" value="2" />
@@ -79,7 +79,7 @@
             </div>
             <div>
               <p>Generally speaking, you rely more on your experience than your imagination.</p>
-              <div class='choices'>
+              <div class='choices required'>
                 <input id="q2-choice_1" name="group2" type="radio" value="1" />
                 <label for="q2-choice_1" value="1">1 Strongly Disagree</label>
                 <input id="q2-choice_2" name="group2" type="radio" value="2" />
@@ -274,6 +274,17 @@
   $(".submit").on("click", function (event) {
     event.preventDefault();
 
+    // Form validation
+    /* var valid = true;
+     if ($(".user-name").val() === "" || $(".photo").val() === "") {
+       valid = false;
+     } else if ($("#question1").val() === "empty" || $("#question2").val() === "empty" || $("#question3").val() ===
+       "empty" || $("#question4").val() === "empty" || $("#question5").val() === "empty" || $("#question6").val() ===
+       "empty" || $("#question7").val() === "empty" || $("#question8").val() === "empty" || $("#question9").val() ===
+       "empty" || $("#question10").val() === "empty") {
+       valid = false;
+     }
+     if (valid === true) {*/
     // Here we grab the form elements
     let currentUser = {
       name: $(".user-name").val().trim(),
@@ -293,16 +304,13 @@
 
     };
 
+    var currentURL = window.location.origin;
 
-
-
-
-
-
-    $.post("/api/friends", currentUser, function (data) {
+    $.post(currentURL + "/api/friends", currentUser, function (data) {
       console.log(data)
       $('#friendName').html(data.name)
       $('#friendPhoto').attr('src', data.photo)
     });
+
   })
 </script>
